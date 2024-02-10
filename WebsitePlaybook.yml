@@ -1,0 +1,27 @@
+---
+- name: Install Apache WebServers and Upload Website page
+  hosts: STAGING_ALL
+  become: yes
+
+
+  vars:
+    source_file : ./Website/index.html
+    destin_file : /var/www/html
+
+
+  tasks:
+  - name: Install Apache to servers
+    yum: name=httpd state=latest
+
+  - name: Copy Website page to the servers
+    copy: src={{source_file}} dest={{destin_file}} mode=0777
+    notify: Restart Apache servers
+
+  - name: Start Apache servers
+    service: name=httpd state=started enabled=yes
+
+
+  handlers:
+  - name: Restart Apache servers
+    service: name=httpd state=restarted 
+...
