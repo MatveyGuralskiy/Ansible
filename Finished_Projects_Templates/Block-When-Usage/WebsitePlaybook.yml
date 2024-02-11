@@ -1,0 +1,51 @@
+---
+- name: Install Apache WebServers and Upload Website page
+  hosts: all
+  become: yes
+
+
+  vars:
+    source_file : ./Website/index.html
+    destin_file : /var/www/html
+
+
+  tasks:
+  - name: Check and Pring Linux distribution
+    debug: var=ansible_os_family
+
+  - block:      #-----RedHat/CentOS-----
+
+     - name: Install Apache to RedHat/CentOS
+       yum: name=httpd state=latest
+       
+     - name: Copy Website page to the RedHat servers
+       copy: src={{source_file}} dest={{destin_file}} mode=0777
+       notify: Restart Apache Redhat
+
+     - name: Start Apache servers
+       service: name=httpd state=started enabled=yes
+
+    when: ansible_os_family=="RedHat"
+
+
+  - block:     #-----Ubuntu/Debian-----
+     
+     - name: Install Apache to Ubuntu/Debian
+       apt: name=apache2 state=latest
+
+     - name: Copy Website page to the Ubuntu servers
+       copy: src={{source_file}} dest={{destin_file}} mode=0777
+       notify: Restart Apache Ubuntu
+
+     - name: Start apache servers
+       service: name=apache2 state=started enabled=yes
+
+    when: ansible_os_family=="Debian"
+
+  handlers:
+   - name: Restart Apache Redhat
+     service: name=httpd state=restarted
+
+   - name: Restart Apache Ubuntu
+     service: name=apache2 state=restarted 
+...
