@@ -1,0 +1,39 @@
+---
+- name: Playbook with Variables and usage of commands (Debug, Register, Set Fact)
+  hosts: STAGING_ANSIBLE
+  become: yes
+
+
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.9
+    MESSAGE1: Welcome to my Playbook
+    MESSAGE2: Have a nice day
+    EXAMPLE_PASSWORD: GSDGHDSJGPOKSPOPE
+
+  tasks:
+    - name: Show Example password to the users
+      debug:
+        var: EXAMPLE_PASSWORD
+
+    - name: Show only Example password
+      debug:
+        msg: "Example password is {{EXAMPLE_PASSWORD}}"
+
+    - name: Connect messages to the final message
+      set_fact: FULL_MESSAGE="{{MESSAGE1}} ,the example password of owner {{owner}} is {{EXAMPLE_PASSWORD}}, {{MESSAGE2}}"
+
+    - debug:
+        var: FULL_MESSAGE
+
+    - name: Show proccesors of servers
+      debug:
+        msg: "{{ansible_processor}}"
+
+    - name: Register time to the variable
+      shell: uptime
+      register: RESULT
+
+    - name: Print time to users
+      debug:
+        var: RESULT.stdout_lines
+...
