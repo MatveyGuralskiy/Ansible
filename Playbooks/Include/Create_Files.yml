@@ -1,0 +1,15 @@
+---
+- name: Create file1 on servers
+  copy:
+      dest: /ANSIBLE/FILE1.txt
+      content: |
+         Text of the file FILE1.txt
+         A couple of strings it's normal
+         Have a nice day!
+
+- name: Create file2 on servers
+  copy:
+      dest: /ANSIBLE/FILE2.txt
+      content: |
+         Message from myself {{ TEXT }}
+...

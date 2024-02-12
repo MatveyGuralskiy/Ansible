@@ -1,0 +1,20 @@
+---
+- name: Include and Import playbook
+  hosts: STAGING_ALL
+  become: yes
+
+
+  vars:
+   TEXT: "Hello everyone,it's my Ansible playbook template"
+  
+  tasks:
+
+  - name: Check the ping of servers
+    ping:
+
+  - name: Create folder
+    include_tasks: Create_Folder.yml
+    
+  - name: Create files
+    include_tasks: Create_Files.yml  
+...
