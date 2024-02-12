@@ -1,4 +1,4 @@
-# 🅰️ Ansible
+# 🔧 Ansible
 Here you'll find playbooks, inventories, and various configurations to automate your infrastructure tasks.
 
 The inventory directory contains files specifying the hosts and groups that Ansible will manage. 
@@ -7,15 +7,15 @@ You can define your infrastructure's inventory using static files or dynamic inv
 
 You can call to your inventory file also *hosts.txt* if you want
 
-### /Ansible
+### /Repository
 
- |-- /Finished Projects Templates
+ |-- /Projects_Templates
 
  |-- /Inventories
        
  |-- /Playbooks
        
- |-- /Screenshots from projects
+ |-- /Projects_Screens_Video
        
  |-- README.md
 
