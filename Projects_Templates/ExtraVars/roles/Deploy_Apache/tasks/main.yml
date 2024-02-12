@@ -1,0 +1,39 @@
+---
+# tasks file for Deploy_Apache
+
+- block:      #-----RedHat/CentOS-----
+
+    - name: Install Apache to RedHat/CentOS
+      yum: name=httpd state=latest
+
+    - name: Start Apache servers
+      service: name=httpd state=started enabled=yes
+
+  when: ansible_os_family=="RedHat"
+
+
+- block:     #-----Ubuntu/Debian-----
+
+    - name: Install Apache to Ubuntu/Debian
+      apt: name=apache2 state=latest
+
+    - name: Start apache servers
+      service: name=apache2 state=started enabled=yes
+
+  when: ansible_os_family=="Debian"
+
+- name: Generate INDEX.HTML file
+  template: src=index.j2 dest={{destin_folder}}/index.html mode=0777
+  notify:
+    - Restart Apache Ubuntu
+    - Restart Apache RedHat
+
+- name: Copy Website page to the Ubuntu servers
+  copy: src={{item}} dest={{destin_folder}} mode=0777
+  with_items:
+    - "ansible-logo.png"
+    - "israel-flag.avif"
+  notify:
+    -  Restart Apache Ubuntu
+    -  Restart Apache RedHat
+...
