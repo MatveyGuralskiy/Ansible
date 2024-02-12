@@ -7,5 +7,17 @@ You can define your infrastructure's inventory using static files or dynamic inv
 
 You can call to your inventory file also *hosts.txt* if you want
 
+### /Ansible
+
+ |-- /Finished Projects Templates
+
+ |-- /Inventories
+       
+ |-- /Playbooks
+       
+ |-- /Screenshots from projects
+       
+ |-- README.md
+
 ##📢 Additional Information
 I hope you liked my repository, don’t forget to rate it and if you notice a code malfunction or any other errors. Don’t hesitate to correct them and be able to improve your project for others
