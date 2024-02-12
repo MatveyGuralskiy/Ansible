@@ -1,0 +1,42 @@
+---
+- name: Test of loops(loop/with_items, until)
+  hosts: STAGING_FRANKFURT
+  become: yes
+
+
+  tasks:
+  - name: Print message to many users
+    debug:
+      msg: "Hello {{ item }}, welcome back"
+    with_items:
+      - "Matvey"
+      - "Johnny"
+      - "Karl"
+      - "Anthony"
+
+  - name: Example for until
+    shell: echo -n A >> ./A_file.txt && cat ./A_file.txt
+    register: OUTPUT
+    delay: 3
+    retries: 5
+    until: OUTPUT.stdout.find("AAAA")==false
+
+  - name: Print Output file
+    debug:
+      var: OUTPUT.stdout
+
+  - name: Install some packages
+    yum: name={{item}} state=latest
+    with_items:
+      - tree
+      - util-linux
+      - net-tools
+
+  - name: Variable save 
+    shell: echo "Finished everything"
+    register: FINISH
+
+  - name: Complete message
+    debug:
+      var: FINISH.stdout
+...
