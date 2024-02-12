@@ -1,0 +1,54 @@
+---
+- name: Redirecting Task execution playbook
+  hosts: STAGING_ALL
+  become: yes
+
+
+  vars:
+   TEXT: "Hello everyone,it's my Ansible playbook template"
+   MESSAGE1: "Thank you so much for your time"
+   MESSAGE2: "Have a nice day, I really enjoy to work with ansible!"
+
+  tasks:
+  - name: Check the ping of servers
+    ping:
+
+  - name: Check the Setup information
+    setup:
+
+  - name: Message to users
+    debug:
+      msg: "{{MESSAGE1}}, {{MESSAGE2}}"
+
+  - name: Unregister Server from Load Balancer
+    shell: echo This server {{inventory_hostname}} was deregistered from our Load Balancer, node name is {{ansible_nodename}} >> /LOG.txt
+    delegate_to: 127.0.0.1
+
+  - name: Create file1 on servers
+    copy:
+        dest: /ANSIBLE/FILE1.txt
+        content: |
+           Text of the file FILE1.txt
+           A couple of strings it's normal
+           Have a nice day!
+    delegate_to: linux1
+
+  - name: Create file2 on servers
+    copy:
+        dest: /ANSIBLE/FILE2.txt
+        content: |
+           Message from myself {{ TEXT }}
+ 
+  - name: Reboot all my servers
+    shell: sleep 3 && reboot now
+    async: 1
+    poll: 0
+
+  - name: Wait till my server will reboot and come up
+    wait_for:
+        host: "{{inventory_hostname}}"
+        state: started
+        delay: 5
+        timeout: 45
+    delegate_to: 127.0.0.1
+...
