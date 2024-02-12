@@ -1,0 +1,7 @@
+---
+- name: Create folder on servers
+  file:
+    path: /ANSIBLE
+    state: directory
+    mode: 0755
+...
