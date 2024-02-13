@@ -7,7 +7,9 @@ You can define your infrastructure's inventory using static files or dynamic inv
 
 You can call to your inventory file also *hosts.txt* if you want
 
-You can also use a special playbook to create resources in *AWS* --> /Playbooks/Creating_AWS_Resources/AWSResources.yml
+You can also use a special playbook to create resources in *AWS*:
+
+/Playbooks/Creating_AWS_Resources/AWSResources.yml
 
 ### /Repository
 
