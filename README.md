@@ -9,6 +9,8 @@ You can call to your inventory file also *hosts.txt* if you want
 
 ### /Repository
 
+ |-- /Dynamic_Inventories
+
  |-- /Encryption
 
  |-- /Projects_Templates
