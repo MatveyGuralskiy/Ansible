@@ -1,0 +1,21 @@
+---
+- name: Example playbook for Dynamic inventory
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Check servers work
+    ping:
+
+  - name: Make yum incorrect installation for error message
+    yum: name=ExampleErrorHandling state=latest
+    ignore_errors: yes
+
+  - name: Print Messages
+    shell: echo The message for customers
+    register: Result
+
+  - name: Save Result of output
+    debug:
+      msg: "{{Result.stdout}}"
+...
