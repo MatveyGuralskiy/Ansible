@@ -19,6 +19,8 @@ You can call to your inventory file also *hosts.txt* if you want
        
  |-- README.md
 
+### 📝 Examples
+
 <p><img src="https://github.com/MatveyGuralskiy/Ansible/blob/main/Projects_Screens_Video/ExtraVars/Screenshot-WebPage.png?raw=true" style="height:350px; width:700px" /></p>
 
 <p><img src="https://github.com/MatveyGuralskiy/Ansible/blob/main/Projects_Screens_Video/ExtraVars/Screenshot_Ansible.png?raw=true" style="height:350px; width:700px" /></p>
