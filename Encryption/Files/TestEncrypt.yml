@@ -1,0 +1,34 @@
+---
+- name: Test for encryption
+  hosts: STAGING_LINUX
+  become: yes
+
+  vars:
+    PASSWORD: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          34326363653233376366336562613131643861336165313633623034353139393933306339353437
+          3536613964656363396662656234623965633165643336620a333662313961636335366334313434
+          65393230323630343539393263353164633431346138343331653561613031333633356333633865
+          6434316234636261300a323235303535333239663332363666316266326535373836613338333463
+          3066
+
+  tasks:
+  - name: See what's inside directory /etc
+    shell: ls -l /etc
+    register: ETC
+
+  - name: Print what's inside to users
+    debug:
+      var: ETC
+    delegate_to: 127.0.0.1
+
+  - name: Send Secret Password
+    copy:
+      dest: "/UserConfig.conf"
+      content: |
+         port=443
+         owner=Matvey
+         login=Matvey
+         home=/home/desktop/
+         password={{PASSWORD}}
+...
