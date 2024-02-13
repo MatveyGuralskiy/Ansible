@@ -1,11 +1,13 @@
 # 🔧 Ansible
-Here you'll find playbooks, inventories, and various configurations to automate your infrastructure tasks.
+Here you'll find playbooks, inventories, dynamic inventories, screenshots and demonstraion video, project tables and various configurations to automate your infrastructure tasks.
 
 The inventory directory contains files specifying the hosts and groups that Ansible will manage. 
 
 You can define your infrastructure's inventory using static files or dynamic inventory scripts.
 
 You can call to your inventory file also *hosts.txt* if you want
+
+You can also use a special playbook to create resources in *AWS* --> /Playbooks/Creating_AWS_Resources/AWSResources.yml
 
 ### /Repository
 
