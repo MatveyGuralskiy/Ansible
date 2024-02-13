@@ -1,0 +1,47 @@
+---
+- name: Error Handling Control
+  hosts: STAGING_ALL
+  #any_errors_fatal: true        To stop playbook after any error
+  become: yes
+
+  tasks:
+  - name: Check servers work
+    ping:
+
+  - name: Make yum incorrect installation for error message
+    yum: name=ExampleErrorHandling state=latest
+    ignore_errors: yes
+
+  - name: Print Messages
+    shell: echo The message for customers
+    register: Result
+
+  - name: Save Result of output
+    debug:
+      msg: "{{Result.stdout}}"
+
+  - name: Open non-existent file
+    shell: cat /FILE.txt
+    register: Open
+    ignore_errors: yes
+
+  - name: Print Open (Shell command cat non-existent file)
+    debug:
+      var: Open.stderr_lines
+    ignore_errors: yes
+
+  - name: See all files inside directory /etc
+    shell: ls -a /etc
+    register: Etc
+    failed_when: "'hosts' in Etc.stdout_lines"
+    ignore_errors: yes
+
+  - name: Print Etc directory
+    debug:
+      msg: "{{Etc.stdout_lines}} and Result of errors equal: {{Etc.rc}}"
+
+  - name: See all files inside directory /dev
+    shell: ls -a /dev
+    register: Dev
+    failed_when: Dev.rc==0
+...
