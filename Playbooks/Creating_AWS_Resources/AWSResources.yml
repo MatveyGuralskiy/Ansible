@@ -1,0 +1,46 @@
+---
+- name: Create EC2 instance
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: Create security group
+      ec2_group:
+        name: (YOUR NAME)
+        description: Ansible created security group for you
+        region: (REGION TO CREATE INSTANCE(SERVER))
+        rules:
+          - proto: tcp
+            ports:
+              - 22
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            ports:
+              - 80
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            ports:
+              - 443
+            cidr_ip: 0.0.0.0/0
+      register: security_group
+
+    - name: Provision EC2 instance
+      ec2:
+        instance_type: t2.micro
+        image: (YOUR AMI ID)
+        key_name: (YOUR KEY PAIR IN AWS)
+        region: (REGION TO CREATE INSTANCE(SERVER))
+        count: 1
+        wait: true
+        group: "{{ security_group.group_id }}"
+        vpc_subnet_id: (YOUR SUBNET ID)
+        assign_public_ip: yes
+        tags:
+          Name: ansible-instance
+      register: ec2
+
+    - name: Add new instance to host group
+      add_host:
+        name: "{{ item.public_ip }}"
+        groups: ec2_instances
+      with_items: "{{ ec2.instances }}"
+...
