@@ -11,7 +11,7 @@ You can also use a special playbook to create resources in *AWS*:
 
 /Playbooks/Creating_AWS_Resources/AWSResources.yml
 
-<p><img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3czdXNlZXFwY3A5cTlreXZqOGNmeXpkZ3oxN3U3ZHoyeWJydG5tciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2ipieXHiKdnqrKYpxc/giphy.gif" style="height:350px; width:700px" /></p>
+<p><img src="https://j.gifs.com/BLvXX2.gif" style="height:350px; width:700px" /></p>
 
 
 ### /Repository
