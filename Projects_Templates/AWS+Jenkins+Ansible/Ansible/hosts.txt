@@ -1,0 +1,6 @@
+[SERVERS]
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+
+[ALL-SERVERS:children]
+SERVERS
