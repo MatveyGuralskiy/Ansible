@@ -1,0 +1,10 @@
+---
+- name: Jinja Template of Webpage Playbook
+  hosts: "{{ MYHOSTS }}"
+  become: yes
+
+
+  #ROLE DEPLOY
+  roles:
+  - {role: Deploy_Apache_Jinja, when: ansible_system=="Linux"}
+...

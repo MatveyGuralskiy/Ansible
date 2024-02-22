@@ -1,0 +1,75 @@
+[STAGING-ISRAEL]
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+
+[STAGING_EUROPE]
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+
+[ALL_STAGING:children]
+STAGING_ISRAEL
+STAGING_EUROPE
+
+[PROD_ISRAEL]
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+
+[PROD_EUROPE]
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+
+[ALL_PROD:children]
+PROD_ISRAEL
+PROD_EUROPE
+
+
+[TEST_ISRAEL]
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+
+[TEST_EUROPE]
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+(SERVER NAME) ansible_host=(IP ADDRESS)
+
+[ALL_TEST:children]
+TEST_ISRAEL
+TEST_EUROPE

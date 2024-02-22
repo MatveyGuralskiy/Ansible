@@ -1,0 +1,5 @@
+---
+# vars file for Deploy_Apache_Jinja
+destin_folder: /var/www/html/
+
+
