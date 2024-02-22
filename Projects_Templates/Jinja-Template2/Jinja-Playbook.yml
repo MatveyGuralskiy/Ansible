@@ -1,0 +1,69 @@
+---
+- name: Jinja Template of Webpage Playbook
+  hosts: ALL_STAGING
+  become: yes
+
+
+  #ENVIRONMENTS
+  vars:
+    source_folder: ./Jinja-Webpage/
+    destin_folder: /var/www/html/
+
+
+  #TASKS
+  tasks:
+  - name: Check the distribution
+    debug:
+      var: ansible_os_family
+
+  - name: Print the distribution
+    shell: lsb_release -a
+
+  #BLOCKS DISTRIBUTIONS
+  - block: #REDHAT OR CENT-OS
+
+      - name: Install Apache Webserver to RedHat or CentOS
+        yum: name=httpd state=latest
+
+      - name: Start the service Apache to RedHat or CentOS
+        service: name=httpd state=started enabled=yes
+
+    when: ansible_os_family=="RedHat"
+
+
+  - block: #DEBIAN OR UBUNTU
+
+      - name: Install Apache Webserver to Debian or Ubuntu
+        apt: name=apache2 state=latest
+
+      - name: Start the service Apache to Debian or Ubuntu
+        service: name=apache2 state=started enabled=yes
+
+    when: ansible_os_family=="Debian"
+
+  #TASKS
+  - name: Convert HTML to Jinja
+    template: src={{ source_folder }}//index.j2 dest={{ destin_folder }}//index.html mode=0777
+    notify:
+      - Restart Apache RedHat
+      - Restart Apache Debian
+
+  - name: Copy Webpage to the server
+    copy: src= {{ source_folder }}/{{ item }} dest={{ destin_folder }} mode=0777
+    with_items:
+      - "jinja-logo.jpg"
+      - "ansible-logo.png"
+    notify:
+      - Restart Apache RedHat
+      - Restart Apache Debian
+ #HANDLERS
+ handlers:
+
+  - name: Restart Apache RedHat
+    service: name=httpd state=restarted
+    when: ansible_os_family=="RedHat"
+
+  - name: Restart Apache Debian
+    service: name=apache2 state=restarted
+    when: ansible_os_family=="Debian"
+...
