@@ -36,6 +36,9 @@ You can also use a special playbook to create resources in *AWS*:
 
 
 
+<p><img src="https://github.com/MatveyGuralskiy/Ansible/blob/main/Projects_Templates/Jinja-Template2/Result/Screen_WebPage.png?raw=true" style="height:500px; width:700px" /></p>
+
+
 <p><img src="https://github.com/MatveyGuralskiy/Ansible/blob/main/Projects_Screens_Video/ExtraVars/Screenshot_Ansible.png?raw=true" style="height:350px; width:700px" /></p>
 
 
