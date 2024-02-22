@@ -1,0 +1,47 @@
+---
+# tasks file for Deploy_Apache_Jinja
+  - name: Check the distribution
+    debug:
+      var: ansible_os_family
+
+  - name: Print the distribution
+    shell: lsb_release -a
+
+  #BLOCKS DISTRIBUTIONS
+  - block: #REDHAT OR CENT-OS
+
+      - name: Install Apache Webserver to RedHat or CentOS
+        yum: name=httpd state=latest
+
+      - name: Start the service Apache to RedHat or CentOS
+        service: name=httpd state=started enabled=yes
+
+    when: ansible_os_family=="RedHat"
+
+
+  - block: #DEBIAN OR UBUNTU
+
+      - name: Install Apache Webserver to Debian or Ubuntu
+        apt: name=apache2 state=latest
+
+      - name: Start the service Apache to Debian or Ubuntu
+        service: name=apache2 state=started enabled=yes
+
+    when: ansible_os_family=="Debian"
+
+  #TASKS
+  - name: Convert HTML to Jinja
+    template: src=index.j2 dest={{ destin_folder }}//index.html mode=0777
+    notify:
+      - Restart Apache RedHat
+      - Restart Apache Debian
+
+  - name: Copy Webpage to the server
+    copy: src={{ item }} dest={{ destin_folder }} mode=0777
+    with_items:
+      - "jinja-logo.jpg"
+      - "ansible-logo.png"
+    notify:
+      - Restart Apache RedHat
+      - Restart Apache Debian
+...
