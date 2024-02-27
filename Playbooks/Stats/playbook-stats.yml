@@ -1,0 +1,168 @@
+---
+- name: Stats Playbook for Ansible Servers
+  hosts: STAGING_ANSIBLE
+  become: yes
+
+  # Environments of playbook
+  vars:
+    Country: "Israel"
+    City: "Tel-Aviv"
+    Name: "Matvey Guralskiy"
+    Space: "echo '\n' && for ((i=0; i<30; i++)); do echo -n '='; done && echo '\n'"
+
+  # Tasks of playbook
+  tasks:
+
+
+    # Disk Space
+    - name: Execute Space command for Disk Space
+      shell: "{{ Space }}"
+      register: space_output_disk_space
+
+    - name: Display Space for Disk Space
+      debug:
+        msg: "{{ space_output_disk_space.stdout }}"
+
+    - name: Stats of Disks space in servers
+      shell: "df -h"
+      register: disk_space_result
+
+    - name: Display Disks space
+      debug:
+        msg: "{{ space_output_disk_space.stdout }} Stats of disks space in servers: {{ disk_space_result.stdout_lines }}"
+
+
+    # Free and Used memory
+    - name: Execute Space command for Memory
+      shell: "{{ Space }}"
+      register: space_output_memory
+
+    - name: Display Space for Memory
+      debug:
+        msg: "{{ space_output_memory.stdout }}"
+
+    - name: Stats of Free and Used memory in servers
+      shell: "free -h"
+      register: memory_result
+
+    - name: Display Free and Used memory
+      debug:
+        msg: "{{ space_output_memory.stdout }} Stats of free and used memory in servers: {{ memory_result.stdout_lines }}"
+
+
+    # Processes
+    - name: Execute Space command for Processes
+      shell: "{{ Space }}"
+      register: space_output_processes
+
+    - name: Display Space for Processes
+      debug:
+        msg: "{{ space_output_processes.stdout }}"
+
+    - name: Stats of Processes in servers
+      shell: "top -n 1 -b"     # One update and batch static option
+      register: process_result
+
+    - name: Display Processes
+      debug:
+        msg: "{{ space_output_processes.stdout }} Stats of Processes in servers: {{ process_result.stdout_lines }}"
+
+
+    # Date
+    - name: Execute Space command for Date
+      shell: "{{ Space }}"
+      register: space_output_date
+
+    - name: Display Space for Date
+      debug:
+        msg: "{{ space_output_date.stdout }}"
+
+    - name: Current date in servers
+      shell: "date"
+      register: date_result
+    - name: Display date
+      debug:
+        msg: "{{space_output_date.stdout}} Your date and current time: {{date_result.stdout_lines}}"
+
+
+    # Hostname
+    - name: Execute Space command for Hostname
+      shell: "{{ Space }}"
+      register: space_output_hostname
+
+    - name: Display Space for Hostname
+      debug:
+        msg: "{{ space_output_hostname.stdout }}"
+
+    - name: Server Name or Hostname
+      debug:
+        msg: "{{ space_output_hostname.stdout }} Your Server name is: {{ ansible_hostname }}"
+
+
+    # Log messages
+    - name: Execute Space command for Log messages
+      shell: "{{ Space }}"
+      register: space_output_log_messages
+
+    - name: Display Space for Log messages
+      debug:
+        msg: "{{ space_output_log_messages.stdout }}"
+
+    - name: Last Log messages
+      shell: "ls /var/log"
+      register: log_messages
+
+    - name: Display Last log messages
+      debug:
+        msg: "{{ space_output_log_messages.stdout }} Server's last log messages: {{ log_messages.stdout_lines }}"
+
+    # IP Address
+    - name: Execute Space command for IP Address
+      shell: "{{ Space }}"
+      register: space_output_ip_address
+
+    - name: Display Space for IP Address
+      debug:
+        msg: "{{ space_output_ip_address.stdout }}"
+
+    - name: Server IP Address
+      shell: sleep 3 && ip addr show
+      register: ip_result
+
+    - name: Display IP Address information
+      debug:
+        msg: "{{ space_output_ip_address.stdout }} Your IP address information of this server: {{ ip_result.stdout_lines }}"
+
+
+    # Open ports
+    - name: Execute Space command for Open ports
+      shell: "{{ Space }}"
+      register: space_output_open_ports
+
+    - name: Display Space for Open ports
+      debug:
+        msg: "{{ space_output_open_ports.stdout }}"
+
+    - name: Open Ports in servers
+      shell: "netstat -tulpn"
+      register: ports_result
+
+    - name: Display open ports
+      debug:
+        msg: "{{ space_output_open_ports.stdout }} Open ports in servers: {{ ports_result.stdout_lines }}"
+
+
+    # Personal message
+    - name: Execute Space command for Personal message
+      shell: "{{ Space }}"
+      register: space_output_message
+
+    - name: Display Space for Personal message
+      debug:
+        msg: "{{ space_output_message.stdout }}"
+
+    - name: Message
+      debug:
+        msg: "{{ space_output_message.stdout }} Created by {{ Name }}, from {{ Country }}, {{ City }}"
+...
+
