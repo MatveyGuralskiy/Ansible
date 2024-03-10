@@ -14,7 +14,7 @@ You can also use a special playbook to create resources in *AWS*:
 <p><img src="https://j.gifs.com/BLvXX2.gif" style="height:350px; width:700px" /></p>
 
 
-### /Repository
+### 📂 Repository
 
  |-- /Dynamic_Inventories
 
